@@ -1,0 +1,62 @@
+System::exit(ExitCode : int)
+# Exits the Console with the passed integer
+> Example: ref System::exit(0);
+
+System::file_create(FileName : string)
+# Creates an empty file with a given name
+> Example: ref System::file_create("example.txt")
+
+System::file_delete(FileName : string)
+# Deletes the file with the passed string
+> Example: ref System::file_delete("example.txt")
+
+System::file_write(fileName : string, fileContents : string)
+# Creates and writes a file with the given contents. If the file already exists, contents are overwritten
+> Example: ref System::file_write("example.txt", "Hello World!")
+
+System::file_read(fileName : string) >> Returns String Array
+# Open and reads the passed string, returns the string[] type
+> Example: ref System::file_write("example.txt", *pass string[] here*)
+
+System::file_append(FileName : string, Contents : string)
+# Appends to the end of a file, also creates it if it does not exist
+> Example: ref System::file_append("example.txt", "Hello World!")
+
+System::file_append(FileName : string, Contents : string[])
+# Appends to the end of a file, also creates it if it does not exist
+> Example: ref System::file_append("example.txt", *pass string[] here*)
+
+System::out(text : string)
+# Outputs & Formats given string
+> Example: ref System::out("Hello, you're name is {0}", *args here*)
+
+System::rand(Seed : int)
+# Generates a random seed, when 0 is passed, the seed is defaults to time(NULL)
+> Example: ref System::rand(0)
+
+System::randint(miValue, int, maxValue : int) >> Returns Int
+# Generates a random number using the seed generated using System::rand(Seed : int). Returns the integer type
+> Example: ref System::randint(0, 10) >> randNum
+
+String::format(FormattedString : string, additionalArguments : string(s) >> Returns String | Ex. ref String::format("Hello {0}", name);
+# Formats a given string with the additional arguments given, view example above. Returns the formatted string
+> Example: ref String::format("Your name is {0}", *args here*) >> exampleString
+
+String::replace(initialString : string, StringToReplace : string, ReplacingString : string) >> Returns String
+# Replaces all elements of the StringToReplace with the ReplacingString. Returns a string
+> Example: ref String::replace(exampleString, "E", "O") >> exampleString
+
+String::substring(initialString : string, StartingPos : int, Length : int) >> Returns String
+# Gets a substring between the starting pos, and the length specified. Returns a string
+> Example: ref String::substring(exampleString, 0, 5) >> exampleString
+
+String::find(initialString : string, LookingFor : string) >> Returns Bool
+# Searches the initial string for the looking for element, returns true if found
+> Example: ref String::find(exampleString, "Hello") >> helloFound
+
+String::length(initialString : string) >> Returns Integer
+# Returns the length of the given string
+> Example: ref String::length(exampleString) >> exampleStringLength;
+
+
+
