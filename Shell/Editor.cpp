@@ -11,6 +11,7 @@
 #include "../Documentation/DocumentationObject.h"
 #include "../Documentation/Documentation.h"
 
+
 #define CONSOLE_COLOR_RESET SetConsoleTextAttribute(outputHandle, 15)
 #define CONSOLE_COLOR_RED SetConsoleTextAttribute(outputHandle, 12)
 #define CONSOLE_COLOR_GREEN SetConsoleTextAttribute(outputHandle, 10)
@@ -78,6 +79,8 @@ void Editor::RunEditor(HANDLE outputHandle) {
     }
 
 
+
+
     while (writing){
         std::cin.clear();
         fflush(stdin);
@@ -111,9 +114,14 @@ void Editor::RunEditor(HANDLE outputHandle) {
                 break;
             }
             case EditorModifers::Undo:{
-                FileLines.pop_back();
-                RunEditor(outputHandle);
-                break;
+                if (FileLines.empty()){
+                    Errors::ThrowCustomError("Cannot undo if there is nothing left to undo!\n");
+                }
+                else{
+                    FileLines.pop_back();
+                    RunEditor(outputHandle);
+                    break;
+                }
             }
             case EditorModifers::Refresh:{
                 RunEditor(outputHandle);
@@ -126,6 +134,29 @@ void Editor::RunEditor(HANDLE outputHandle) {
                 std::cout << *skiptFileName << " has been saved!\nPress any key to return to the editor...";
                 getch();
                 CONSOLE_COLOR_RESET;
+                RunEditor(outputHandle);
+                break;
+            }
+            case EditorModifers::Help:{
+                const std::unordered_map<std::string, std::string> commands =
+                        {
+                                {"lookup", "Lookup a keyword in documentation"},
+                                { "undo", "Undo the last line that was inputted"},
+                                { "refresh", "Clear the shell of any non-input messages such as errors or warnings"},
+                                { "save", "Save the contents of the file"},
+                                { "clear", "Clear the console"},
+                                { "help", "You're already here"}
+                        };
+
+                std::cout << "\nShell Commmands (" << commands.size() << ")\n";
+                for (const auto& command : commands){
+                    std::cout << command.first << ":\t" << command.second << "\n";
+                }
+                std::cout << "\n=================================================\n";
+                break;
+            }
+            case EditorModifers::Clear:{
+                FileLines.clear();
                 RunEditor(outputHandle);
                 break;
             }

@@ -58,5 +58,37 @@ String::length(initialString : string) >> Returns Integer
 # Returns the length of the given string
 > Example: ref String::length(exampleString) >> exampleStringLength;
 
+Array::at(inputArray : array[], index : integer) >> Returns Non-Array Data-Type
+# Returns the element that resides at the index
+> Example: ref Array::at(nameArray, 3) >> name
+
+Array::add(inputArray : array[], input : dynamic)
+# Adds an element to the array, input must be non-array data-type
+> Example: ref Array::add(nameArray, "Rob")
+
+Array::length(inputArray : array[]) >> Returns Integer
+# Returns the length of the array
+> Example: ref Array::length(nameArray) >> arrayLength
+
+Math::prime(input : double) >> Returns boolean
+# Returns whether the input number is a prime number
+> Example: ref Math::prime(42) >> isPrime
+
+Math::modulo(input : double, inputTwo : double) >> Returns Double
+# Executes a modulo function [ THIS IS DEPRECATED ]
+> Example: ref Math::modulo(10, 5) >> remainder
+
+Internal::execute_skipt(skiptFileName : string)
+# Executes another Skipt File with the given string name
+> Example: ref Internal::execute_skipt(fileName)
+
+Internal::list_variables()
+# List all the variables that have been defined by the user or by Skipt
+> Example: ref Internal::list_variables()
+
+Internal::convert(variableName : variable, dataType)
+# Convert a variable to a new data-type
+> Example: ref Internal::convert(toInt, int)
+
 
 

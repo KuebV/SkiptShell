@@ -5,6 +5,15 @@
 #include <iostream>
 #include "Documentation.h"
 #include "DocumentationObject.h"
+#include "../String.h"
+
+#define CONSOLE_COLOR_RESET SetConsoleTextAttribute(outputHandle, 15)
+#define CONSOLE_COLOR_RED SetConsoleTextAttribute(outputHandle, 12)
+#define CONSOLE_COLOR_GREEN SetConsoleTextAttribute(outputHandle, 10)
+#define CONSOLE_COLOR_BLUE SetConsoleTextAttribute(outputHandle, 9)
+#define CONSOLE_COLOR_AQUA SetConsoleTextAttribute(outputHandle, 11)
+#define CONSOLE_COLOR_PURPLE SetConsoleTextAttribute(outputHandle, 13)
+#define CONSOLE_COLOR_YELLOW SetConsoleTextAttribute(outputHandle, 14)
 
 
 static std::vector<DocumentationObject> DocObjects;
@@ -62,4 +71,38 @@ bool Documentation::ReferenceExists(const std::string &text) {
 
     return false;
 }
+
+void Documentation::DisplayDocumentation(HANDLE outputHandle) {
+    while (true){
+        CONSOLE_COLOR_RESET;
+
+        system("CLS");
+        std::cout << "Skipt Documentation\nType a keyword below to search:\n============================\n>>> ";
+
+        std::unique_ptr<std::string> userInput = std::make_unique<std::string>();
+        std::getline(std::cin, *userInput);
+
+        std::vector<DocumentationObject> obj = Documentation::Lookup(*userInput);
+
+        std::cout << "\nResults for \"" << *userInput << "\" | (" << obj.size() << ")\n---------------";
+        for (int i = 0; i < obj.size(); i++){
+            std::cout << "------------------------------\n";
+            CONSOLE_COLOR_GREEN;
+            std::cout << obj[i].Arguments << "\n";
+            CONSOLE_COLOR_YELLOW;
+            std::cout << obj[i].Comment << "\n";
+            CONSOLE_COLOR_AQUA;
+            std::cout << obj[i].Examples << "\n\n";
+            CONSOLE_COLOR_RESET;
+        }
+        std::cout << "\n\n===============================\n";
+        CONSOLE_COLOR_RED;
+        std::cout << "Press ENTER to re-search\n";
+
+        std::unique_ptr<std::string> emptyInput = std::make_unique<std::string>();
+        std::getline(std::cin, *emptyInput);
+    }
+}
+
+
 

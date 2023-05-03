@@ -163,7 +163,9 @@ Editor::EditorModifers Lexer::ToModifier(const std::string &mod) {
             { "undo", Editor::EditorModifers::Undo},
             { "refresh", Editor::EditorModifers::Refresh},
             { "save", Editor::EditorModifers::Save},
-            { "lookup", Editor::EditorModifers::Lookup}
+            { "lookup", Editor::EditorModifers::Lookup},
+            { "help", Editor::EditorModifers::Help},
+            { "clear", Editor::EditorModifers::Clear}
     };
 
     auto item = modifierTable.find(mod);

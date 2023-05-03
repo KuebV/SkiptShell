@@ -30,6 +30,8 @@ public:
         Refresh,
         Save,
         Lookup,
+        Clear,
+        Help,
         Unknown,
         None
     };
